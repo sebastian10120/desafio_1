@@ -1,36 +1,51 @@
 #include <iostream>
+#include <random>
 using namespace std;
 
 char confirmacion_de_menu();
 char seleccion_tamaño_de_la_matriz();
 char letra_minuscula(char dato);
+int **crear_matriz(int ancho,int largo);
+void imprimir_matriz(int **matriz,int ancho,int largo);
+int numero_ramdom();
 int main()
 {
-    short int tamaño;
+    unsigned short int ancho, numero_pieza;
     char dato_entrada_menu,tamaño_matriz;
-    bool juego_iniciar = true;
-    bool tamaño_iniciar = true;
+    bool juego_iniciar(true), empezar_partida;
     do{
         cout << "elija una de las opciones para continuar\n1) iniciar juego/n2) salir\n";
         dato_entrada_menu = confirmacion_de_menu();
         if (dato_entrada_menu == '1'){
             bool seleccion_tamaño(true);
+            int **matriz;
             do{
             tamaño_matriz = seleccion_tamaño_de_la_matriz();
                 if (tamaño_matriz == '1'){
-                    tamaño = 8;
+                    ancho = 8;
+                    int **matriz = crear_matriz(ancho,(ancho+4));
+                    empezar_partida = true;
                 }
                 else if (tamaño_matriz == '2'){
-                    tamaño = 16;
+                    ancho = 16;
+                    int **matriz = crear_matriz(ancho,(ancho+4));
+                    empezar_partida = true;
                 }
                 else if (tamaño_matriz == '3'){
-                    tamaño = 24;
+                    ancho = 24;
+                    int **matriz = crear_matriz(ancho,(ancho+4));
+                    empezar_partida = true;
                 }
                 else if (tamaño_matriz == 'q'){
                     seleccion_tamaño = false;
+                    empezar_partida = false;
                 }
             }
             while(seleccion_tamaño == true);
+            while (empezar_partida == true){
+                imprimir_matriz(matriz, ancho, ancho+4);
+                numero_pieza = numero_ramdom();
+            }
         }
         else if (dato_entrada_menu == '2'){
             cout << "se cerro el juego";
@@ -39,6 +54,7 @@ int main()
     }
     while(juego_iniciar == true);
 }
+
 char confirmacion_de_menu(){
     char dato[150], dato_salida;
     cin >> dato;
@@ -74,5 +90,35 @@ char letra_minuscula(char dato){
     }
     return dato;
 }
-int imprimir_matriz(int tamaño){
+void imprimir_matriz(int **matriz,int ancho,int largo){
+    int mask = 1;
+    for (int i = 0;i < largo; i++ ){
+        for (int j = 0; j < ancho; j ++){
+            if (i > 3){
+                if (((mask << j)) ^ matriz[i][j]){
+                    cout << "#";
+                }
+                else {
+                    cout << "[]";
+                }
+            }
+        }
+        cout << endl;
+    }
 }
+int **crear_matriz(int ancho,int largo){
+    int **matriz = new int*[largo];
+    for(int i = 0; i < largo; i++){
+        matriz[i] = new int[ancho]();
+    }
+    return matriz;
+}
+int numero_ramdom(){
+    mt19937 gen(random_device{}());
+    uniform_int_distribution<int> dis(1,5);
+    int numero = dis(gen);
+    return numero;
+}
+int pieza
+char manipulacion_pieza
+int colisiones
