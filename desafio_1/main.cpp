@@ -10,7 +10,7 @@ void imprimir_matriz(int **matriz,int ancho,int largo);
 int numero_ramdom();
 int main()
 {
-    unsigned short int ancho, numero_pieza;
+    unsigned short int *ancho, numero_pieza;
     char dato_entrada_menu,tamaño_matriz;
     bool juego_iniciar(true), empezar_partida;
     do{
@@ -22,18 +22,18 @@ int main()
             do{
             tamaño_matriz = seleccion_tamaño_de_la_matriz();
                 if (tamaño_matriz == '1'){
-                    ancho = 8;
-                    int **matriz = crear_matriz(ancho,(ancho+4));
+                    *ancho = 8;
+                    int **matriz = crear_matriz(*ancho,(*ancho+4));
                     empezar_partida = true;
                 }
                 else if (tamaño_matriz == '2'){
-                    ancho = 16;
-                    int **matriz = crear_matriz(ancho,(ancho+4));
+                    *ancho = 16;
+                    int **matriz = crear_matriz(*ancho,(*ancho+4));
                     empezar_partida = true;
                 }
                 else if (tamaño_matriz == '3'){
-                    ancho = 24;
-                    int **matriz = crear_matriz(ancho,(ancho+4));
+                    *ancho = 24;
+                    int **matriz = crear_matriz(*ancho,(*ancho+4));
                     empezar_partida = true;
                 }
                 else if (tamaño_matriz == 'q'){
@@ -43,8 +43,8 @@ int main()
             }
             while(seleccion_tamaño == true);
             while (empezar_partida == true){
-                imprimir_matriz(matriz, ancho, ancho+4);
-                numero_pieza = numero_ramdom();
+
+
             }
         }
         else if (dato_entrada_menu == '2'){
@@ -115,10 +115,101 @@ int **crear_matriz(int ancho,int largo){
 }
 int numero_ramdom(){
     mt19937 gen(random_device{}());
-    uniform_int_distribution<int> dis(1,5);
+    uniform_int_distribution<int> dis(0,5);
     int numero = dis(gen);
     return numero;
 }
-int pieza
-char manipulacion_pieza
-int colisiones
+void juego(int **matriz,int *ancho){
+    bool juego(true);
+    do{
+
+    }
+    while(juego == true);
+
+
+}
+int **inicial_pieza(){
+    int *tamaño_fila;
+    int *tamaño_columna;
+    int pieza = numero_ramdom();
+    int **item;
+    /*cuadrado*/
+    if (pieza == 0){
+        tamaño_fila = new int(2);
+        tamaño_columna = new int(2);
+        item = new int* [*tamaño_fila];
+        for (int i = 0; i < *tamaño_fila; i++){
+            item[i] = new int[*tamaño_columna]();
+        }
+        item[0][0]=1;
+        item[0][1]=1;
+        item[1][0]=1;
+        item[1][1]=1;
+    }
+    /*palo*/
+    else if (pieza == 1){
+        tamaño_fila = new int(2);
+        tamaño_columna = new int(2);
+        item = new int* [*tamaño_fila];
+        for (int i = 0; i < *tamaño_fila; i++){
+            item[i] = new int[*tamaño_columna]();
+        }
+        item[0][0]=1;
+        item[1][0]=1;
+        item[2][0]=1;
+        item[3][0]=1;
+    }
+    /*T*/
+    else if(pieza == 2){
+        tamaño_fila = new int(2);
+        tamaño_columna = new int(2);
+        item = new int* [*tamaño_fila];
+        for (int i = 0; i < *tamaño_fila; i++){
+            item[i] = new int[*tamaño_columna]();
+        }
+        item[0][0]=1;
+        item[0][1]=1;
+        item[0][2]=1;
+        item[1][1]=1;
+    }
+    /*l*/
+    else if(pieza == 3){
+        tamaño_fila = new int(3);
+        tamaño_columna = new int(2);
+        item = new int* [*tamaño_fila];
+        for (int i = 0; i < *tamaño_fila; i++){
+            item[i] = new int[*tamaño_columna]();
+        }
+        item[0][0] = 1;
+        item[1][0] = 1;
+        item[2][0] = 1;
+        item[2][1] = 1;
+    }
+    /*J*/
+    else if(pieza == 4){
+        tamaño_fila = new int(3);
+        tamaño_columna = new int(2);
+        item = new int* [*tamaño_fila];
+        for (int i = 0; i < *tamaño_fila; i++){
+            item[i] = new int[*tamaño_columna]();
+        }
+        item[0][1] = 1;
+        item[1][1] = 1;
+        item[2][0] = 1;
+        item[2][1] = 1;
+    }
+    /*s*/
+    else if(pieza == 5){
+        tamaño_fila = new int(2);
+        tamaño_columna = new int(3);
+        item = new int* [*tamaño_fila];
+        for (int i = 0; i < *tamaño_fila; i++){
+            item[i] = new int[*tamaño_columna]();
+        }
+        item[0][1] = 1;
+        item[0][2] = 1;
+        item[1][0] = 1;
+        item[1][1] = 1;
+    }
+    return item;
+}
